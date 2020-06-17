@@ -35,8 +35,8 @@ requirements:
 # hangs on osx CI
 {% set skips = skips + ["testLoop"] %}  # [osx]
 
-# fails on win CI with perms errors
-{% set skips = skips + ["test_dump", "test_remove_from_non_empty_file"] %}
+# fails on win CI with perms errors, etc.
+{% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
 
 test:
   source_files:
