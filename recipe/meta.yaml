@@ -1,47 +1,53 @@
 {% set name = "doit" %}
 {% set version = "0.32.0" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c" %}
 
 package:
-  name: '{{ name|lower }}'
-  version: '{{ version }}'
+  name: {{ name }}
+  version: {{ version }}
 
 source:
-  fn: '{{ name }}-{{ version }}.tar.gz'
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  '{{ hash_type }}': '{{ hash_value }}'
+  sha256: 323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c
 
 build:
   number: 0
-  skip: True  # [py2k]
+  skip: true  # [py<34]
   entry_points:
     - doit = doit.__main__:main
-  script: python setup.py install  --single-version-externally-managed --record=record.txt
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   build:
+    - pip
     - python
-    - setuptools
   run:
-    - python
     - cloudpickle
+    - python
     - macfsevents  # [osx]
     - pyinotify  # [linux]
 
 test:
+  source_files:
+    - tests
+  requires:
+    - pip
+    - pytest >=4.0
+    - pytest-cov
   imports:
     - doit
   commands:
+    - python -m pip check
+    - doit --version
     - doit --help
+    - pytest -vv --cov doit -k "not (test_execute or test_sqlite_import)"
 
 about:
-  home: http://pydoit.org
+  home: https://pydoit.org
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: doit - Automation Tool
-  description: "
+  description: |
     `doit` is a task management & automation tool.
 
     `doit` comes from the idea of bringing the power of build-tools to execute
@@ -51,13 +57,14 @@ about:
     simple to use and flexible to deal with complex work-flows.
 
     It is specially suitable for building and managing custom work-flows where
-    there is no out-of-the-box solution available. 
-    
+    there is no out-of-the-box solution available.
+
     `doit` has been successfully used on: systems test/integration automation,
     scientific computational pipelines, content generation, configuration
     management, etc."
-  doc_url: 'http://pydoit.org/contents.html'
-  dev_url: 'https://github.com/pydoit/doit'
+  doc_url: https://pydoit.org/contents.html
+  dev_url: https://github.com/pydoit/doit
+  doc_source_url: https://github.com/pydoit/doit/tree/{{ version }}/doc
 
 extra:
   recipe-maintainers:
