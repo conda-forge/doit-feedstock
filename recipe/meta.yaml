@@ -30,10 +30,10 @@ requirements:
 {% set skips = ["test_execute", "test_sqlite_import"] %}
 
 # py38 seems to pass
-{% set skips += ["test_not_picklable_raises_InvalidTask"] %}  # [py38]
+{% set skips = skips + ["test_not_picklable_raises_InvalidTask"] %}  # [py>=38]
 
 # hangs on osx CI
-{% set skips = skips + ["testLoop", "TestCmdDumpDB.testDefault"] %}  # [osx]
+{% set skips = skips + ["testLoop", "(TestCmdDumpDB and testDefault)"] %}  # [osx]
 
 # fails on win CI with perms errors, etc.
 {% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
