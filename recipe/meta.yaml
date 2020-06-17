@@ -1,47 +1,65 @@
 {% set name = "doit" %}
-{% set version = "0.31.1" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "bad01949effd537cade3aea286cc2cde074bdb7a4f442015557b1228dd46f5ea" %}
+{% set version = "0.32.0" %}
 
 package:
-  name: '{{ name|lower }}'
-  version: '{{ version }}'
+  name: {{ name }}
+  version: {{ version }}
 
 source:
-  fn: '{{ name }}-{{ version }}.tar.gz'
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  '{{ hash_type }}': '{{ hash_value }}'
+  sha256: 323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c
 
 build:
-  number: 1000
-  skip: True  # [py2k]
+  number: 0
+  skip: true  # [py<34]
   entry_points:
     - doit = doit.__main__:main
-  script: python setup.py install  --single-version-externally-managed --record=record.txt
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   build:
+    - pip
     - python
-    - setuptools
   run:
-    - python
     - cloudpickle
+    - python
     - macfsevents  # [osx]
     - pyinotify  # [linux]
 
+# we don't ship all of the fixtures
+{% set skips = ["test_execute", "test_sqlite_import"] %}
+
+# py38 seems to pass
+{% set skips = skips + ["test_not_picklable_raises_InvalidTask"] %}  # [py>=38]
+
+# hangs on osx CI
+{% set skips = skips + ["testLoop", "(TestCmdDumpDB and testDefault)", "test_run_wait"] %}  # [osx]
+{% set skips = skips + ["test_invalid_args"] %}  # [osx and py==38]
+
+# fails on win CI with perms errors, etc.
+{% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
+
 test:
+  source_files:
+    - tests
+  requires:
+    - pip
+    - pytest >=4.0
   imports:
     - doit
   commands:
+    - python -m pip check
+    - doit --version
     - doit --help
+    - pytest -vv -k "not ({{ skips | join(' or ') }})"
 
 about:
-  home: http://pydoit.org
+  home: https://pydoit.org
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: doit - Automation Tool
-  description: "
+  description: |
     `doit` is a task management & automation tool.
 
     `doit` comes from the idea of bringing the power of build-tools to execute
@@ -51,14 +69,16 @@ about:
     simple to use and flexible to deal with complex work-flows.
 
     It is specially suitable for building and managing custom work-flows where
-    there is no out-of-the-box solution available. 
-    
+    there is no out-of-the-box solution available.
+
     `doit` has been successfully used on: systems test/integration automation,
     scientific computational pipelines, content generation, configuration
     management, etc."
-  doc_url: 'http://pydoit.org/contents.html'
-  dev_url: 'https://github.com/pydoit/doit'
+  doc_url: https://pydoit.org/contents.html
+  dev_url: https://github.com/pydoit/doit
+  doc_source_url: https://github.com/pydoit/doit/tree/{{ version }}/doc
 
 extra:
   recipe-maintainers:
     - pbronez
+    - bollwyvl
