@@ -33,7 +33,7 @@ requirements:
 {% set skips = skips + ["test_not_picklable_raises_InvalidTask"] %}  # [py>=38]
 
 # hangs on osx CI
-{% set skips = skips + ["testLoop", "(TestCmdDumpDB and testDefault)"] %}  # [osx]
+{% set skips = skips + ["testLoop", "(TestCmdDumpDB and testDefault)", "test_run_wait"] %}  # [osx]
 {% set skips = skips + ["test_invalid_args"] %}  # [osx and py==38]
 
 # fails on win CI with perms errors, etc.
