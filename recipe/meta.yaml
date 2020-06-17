@@ -1,7 +1,7 @@
 {% set name = "doit" %}
-{% set version = "0.31.1" %}
+{% set version = "0.32.0" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "bad01949effd537cade3aea286cc2cde074bdb7a4f442015557b1228dd46f5ea" %}
+{% set hash_value = "323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c" %}
 
 package:
   name: '{{ name|lower }}'
@@ -13,7 +13,7 @@ source:
   '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  number: 1000
+  number: 0
   skip: True  # [py2k]
   entry_points:
     - doit = doit.__main__:main
