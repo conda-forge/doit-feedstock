@@ -39,7 +39,12 @@ test:
     - python -m pip check
     - doit --version
     - doit --help
-    - pytest -vv --cov doit -k "not (test_execute or test_sqlite_import)"
+    - |
+      pytest -vv --cov doit -k "not (
+        test_execute
+        or test_sqlite_import
+        or test_not_picklable_raises_InvalidTask
+      )"
 
 about:
   home: https://pydoit.org
