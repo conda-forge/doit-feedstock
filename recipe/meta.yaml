@@ -1,5 +1,5 @@
 {% set name = "doit" %}
-{% set version = "0.32.0" %}
+{% set version = "0.33.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c
+  sha256: b777b8ab56711bfbd9345776544d2d107a27612f2c4184b5d2a340388ecba894
 
 build:
   number: 0
