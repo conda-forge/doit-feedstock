@@ -1,20 +1,25 @@
 {% set name = "doit" %}
-{% set version = "0.32.0" %}
+{% set version = "0.33.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 323d0411e50a0babb945e2a639aa6e633fbb84a9f98086df0c880e739237750c
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: b777b8ab56711bfbd9345776544d2d107a27612f2c4184b5d2a340388ecba894
+    folder: dist
+  - url: https://github.com/pydoit/doit/archive/{{ version }}.tar.gz
+    sha256: f33f612429049a2ae8a871d5717905f89d58af43edb46561334a1032e2e0aa84
+    folder: src
+
 
 build:
   number: 0
   skip: true  # [py<34]
   entry_points:
     - doit = doit.__main__:main
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: cd dist && {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   build:
@@ -41,23 +46,24 @@ requirements:
 
 test:
   source_files:
-    - tests
+    - src/tests
   requires:
     - pip
     - pytest >=4.0
+    - pytest-cov
   imports:
     - doit
   commands:
     - python -m pip check
     - doit --version
     - doit --help
-    - pytest -vv -k "not ({{ skips | join(' or ') }})"
+    - cd src && pytest --cov doit -vv -k "not ({{ skips | join(' or ') }})"
 
 about:
   home: https://pydoit.org
   license: MIT
   license_family: MIT
-  license_file: LICENSE
+  license_file: src/LICENSE
   summary: doit - Automation Tool
   description: |
     `doit` is a task management & automation tool.
