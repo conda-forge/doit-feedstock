@@ -24,10 +24,10 @@ build:
 requirements:
   build:
     - pip
-    - python >=3.5
+    - python
   run:
     - cloudpickle
-    - python >=3.5
+    - python
     - macfsevents  # [osx]
     - pyinotify  # [linux]
 
