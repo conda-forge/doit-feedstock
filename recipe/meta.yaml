@@ -15,7 +15,7 @@ source:
 
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<34]
   entry_points:
     - doit = doit.__main__:main
