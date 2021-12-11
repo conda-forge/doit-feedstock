@@ -1,35 +1,5 @@
-{% set name = "doit" %}
-{% set version = "0.33.1" %}
-
-package:
-  name: {{ name }}
-  version: {{ version }}
-
-source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 37c3b35c2151647b968b2af24481112b2f813c30f695366db0639d529190a143
-    folder: dist
-  - url: https://github.com/pydoit/doit/archive/{{ version }}.tar.gz
-    sha256: d4a405c478701f9e0eb6f5114ef0883e88c53b4693de30e49e4c3508c512b229
-    folder: src
-
-
-build:
-  number: 2
-  skip: true  # [py<34]
-  entry_points:
-    - doit = doit.__main__:main
-  script: cd dist && {{ PYTHON }} -m pip install . --no-deps -vv
-
-requirements:
-  host:
-    - pip
-    - python
-  run:
-    - cloudpickle
-    - python
-    - macfsevents  # [osx]
-    - pyinotify  # [linux]
+{% set version = "0.34.0" %}
+{% set build_number = 0 %}
 
 # we don't ship all of the fixtures
 {% set skips = ["test_execute", "test_sqlite_import"] %}
@@ -44,26 +14,125 @@ requirements:
 # fails on win CI with perms errors, etc.
 {% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
 
+{% set cov_fail_under = 99 %}
+
+package:
+  name: doit-split
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/d/doit/doit-{{ version }}.tar.gz
+  sha256: 8ef1de105cbca939c73e836dff86c812c9228e11ed8702f6955b7a086caac02d
+
+build:
+  number: {{ build_number }}
+
+requirements:
+  host:
+    - python
+  run:
+    - python
+
 test:
-  source_files:
-    - src/tests
-  requires:
-    - pip
-    - pytest >=4.0
-    - pytest-cov
-  imports:
-    - doit
   commands:
-    - python -m pip check
-    - doit --version
-    - doit --help
-    - cd src && pytest --cov doit -vv -k "not ({{ skips | join(' or ') }})"
+    - echo "TBD"
+
+outputs:
+  - name: doit
+    build:
+      number: {{ build_number }}
+      entry_points:
+        - doit = doit.__main__:main
+      script: '{{ PYTHON }} -m pip install . --no-deps -vv'
+    requirements:
+      host:
+        - pip
+        - python
+      run:
+        - cloudpickle
+        - python
+        - macfsevents  # [osx]
+        - pyinotify  # [linux]
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+        - doit --version
+        - doit --help
+
+  - name: doit-with-toml
+    build:
+      number: {{ build_number }}
+      noarch: python
+    requirements:
+      host:
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("doit") }}
+        - python >=3.6
+        - toml >=0.10.1
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+
+    about:
+      summary: doit - Automation Tool (with toml config)
+
+  - name: doit-with-plugins
+    build:
+      noarch: python
+    requirements:
+      host:
+        - python >=3.6
+      run:
+        - {{ pin_subpackage("doit") }}
+        - python >=3.6
+        - setuptools
+    test:
+      requires:
+        - pip
+      commands:
+        - pip check
+
+    about:
+      summary: doit - Automation Tool (with plugins)
+
+  - name: doit-with-all
+    build:
+      number: {{ build_number }}
+      noarch: python
+    requirements:
+      host:
+        - python >=3.6
+      run:
+        - python >=3.6
+        - {{ pin_subpackage("doit-with-toml") }}
+        - {{ pin_subpackage("doit-with-plugins") }}
+
+    test:
+      source_files:
+        - tests
+      requires:
+        - pip
+        - pytest >=4.0
+        - pytest-cov
+      imports:
+        - doit
+      commands:
+        - pip check
+        - pytest --cov doit -vv -k "not ({{ skips | join(' or ') }})" --no-cov-on-fail --cov-fail-under={{ cov_fail_under }}
+
+    about:
+      summary: doit - Automation Tool (with all extras)
 
 about:
   home: https://pydoit.org
   license: MIT
   license_family: MIT
-  license_file: src/LICENSE
+  license_file: LICENSE
   summary: doit - Automation Tool
   description: |
     `doit` is a task management & automation tool.
