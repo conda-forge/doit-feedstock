@@ -154,6 +154,7 @@ about:
   doc_source_url: https://github.com/pydoit/doit/tree/{{ version }}/doc
 
 extra:
+  feedstock-name: doit
   recipe-maintainers:
     - pbronez
     - bollwyvl
