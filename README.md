@@ -144,6 +144,9 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit-green.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--all-green.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--plugins-green.svg)](https://anaconda.org/conda-forge/doit-with-plugins) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-plugins.svg)](https://anaconda.org/conda-forge/doit-with-plugins) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-plugins.svg)](https://anaconda.org/conda-forge/doit-with-plugins) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-plugins.svg)](https://anaconda.org/conda-forge/doit-with-plugins) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--toml-green.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) |
 
 Installing doit
 ===============
@@ -155,10 +158,10 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `doit` can be installed with:
+Once the `conda-forge` channel has been enabled, `doit, doit-with-all, doit-with-plugins, doit-with-toml` can be installed with:
 
 ```
-conda install doit
+conda install doit doit-with-all doit-with-plugins doit-with-toml
 ```
 
 It is possible to list all of the versions of `doit` available on your platform with:
