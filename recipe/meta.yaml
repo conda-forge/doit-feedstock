@@ -15,8 +15,8 @@
 {% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
 
 {% set cov_fail_under = 97 %}
-{% set cov_fail_under = 96 %} # [osx]
-{% set cov_fail_under = 95 %} # [win]
+{% set cov_fail_under = 96 %}  # [osx]
+{% set cov_fail_under = 95 %}  # [win]
 
 
 package:
