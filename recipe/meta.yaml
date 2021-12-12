@@ -14,7 +14,10 @@
 # fails on win CI with perms errors, etc.
 {% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
 
-{% set cov_fail_under = 99 %}
+{% set cov_fail_under = 97 %}
+{% set cov_fail_under = 96 %} # [osx]
+{% set cov_fail_under = 95 %} # [win]
+
 
 package:
   name: doit-split
@@ -123,7 +126,7 @@ outputs:
         - doit
       commands:
         - pip check
-        - pytest --cov doit -vv -k "not ({{ skips | join(' or ') }})" --no-cov-on-fail --cov-fail-under={{ cov_fail_under }}
+        - pytest --cov doit -vv -k "not ({{ skips | join(' or ') }})" --no-cov-on-fail --cov-fail-under={{ cov_fail_under }} --cov-report term-missing:skip-covered
 
     about:
       summary: doit - Automation Tool (with all extras)
