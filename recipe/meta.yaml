@@ -29,6 +29,7 @@ source:
 
 build:
   number: {{ build_number }}
+  skip: true  # [py<38]
 
 requirements:
   host:
@@ -70,10 +71,10 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python >=3.8
+        - python
       run:
         - {{ pin_subpackage("doit") }}
-        - python >=3.8
+        - python
         - toml >=0.10.1
     test:
       requires:
@@ -89,10 +90,10 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python >=3.8
+        - python
       run:
         - {{ pin_subpackage("doit") }}
-        - python >=3.8
+        - python
         - setuptools
     test:
       requires:
@@ -109,9 +110,9 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python >=3.8
+        - python
       run:
-        - python >=3.8
+        - python
         - {{ pin_subpackage("doit-with-toml") }}
         - {{ pin_subpackage("doit-with-plugins") }}
 
