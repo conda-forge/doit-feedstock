@@ -1,5 +1,6 @@
 {% set version = "0.35.0" %}
 {% set build_number = 0 %}
+{% set min_noarch_python = ">=3.8" %}
 
 # we don't ship all of the fixtures
 {% set skips = ["test_execute", "test_sqlite_import"] %}
@@ -34,6 +35,7 @@ build:
 requirements:
   host:
     - python
+    - pip
   run:
     - python
 
@@ -71,10 +73,10 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python
+        - python {{ min_noarch_python }}
       run:
         - {{ pin_subpackage("doit") }}
-        - python
+        - python {{ min_noarch_python }}
         - toml >=0.10.1
     test:
       requires:
@@ -93,7 +95,7 @@ outputs:
         - python
       run:
         - {{ pin_subpackage("doit") }}
-        - python
+        - python {{ min_noarch_python }}
         - setuptools
     test:
       requires:
@@ -110,9 +112,9 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python
+        - python {{ min_noarch_python }}
       run:
-        - python
+        - python {{ min_noarch_python }}
         - {{ pin_subpackage("doit-with-toml") }}
         - {{ pin_subpackage("doit-with-plugins") }}
 
