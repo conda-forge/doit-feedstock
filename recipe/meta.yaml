@@ -70,10 +70,10 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python >=3.6
+        - python >=3.8
       run:
         - {{ pin_subpackage("doit") }}
-        - python >=3.6
+        - python >=3.8
         - toml >=0.10.1
     test:
       requires:
@@ -89,10 +89,10 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python >=3.6
+        - python >=3.8
       run:
         - {{ pin_subpackage("doit") }}
-        - python >=3.6
+        - python >=3.8
         - setuptools
     test:
       requires:
@@ -109,9 +109,9 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python >=3.6
+        - python >=3.8
       run:
-        - python >=3.6
+        - python >=3.8
         - {{ pin_subpackage("doit-with-toml") }}
         - {{ pin_subpackage("doit-with-plugins") }}
 
