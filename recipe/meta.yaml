@@ -1,4 +1,4 @@
-{% set version = "0.34.2" %}
+{% set version = "0.35.0" %}
 {% set build_number = 0 %}
 
 # we don't ship all of the fixtures
@@ -25,7 +25,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/d/doit/doit-{{ version }}.tar.gz
-  sha256: 388111f8a6a5b3b44620ceeb287d0585927c85d0d6d3f8790d34fbb45c0cf6c3
+  sha256: 715a322c874c4cb862394e3a0d69ff32572b5259f57036fbfdc1053c4c01d348
 
 build:
   number: {{ build_number }}
