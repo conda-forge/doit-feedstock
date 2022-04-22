@@ -1,24 +1,11 @@
-{% set version = "0.35.0" %}
+{% set version = "0.36.0" %}
 {% set build_number = 0 %}
 {% set min_noarch_python = ">=3.8" %}
 
 # we don't ship all of the fixtures
 {% set skips = ["test_execute", "test_sqlite_import"] %}
 
-# py38 seems to pass
-{% set skips = skips + ["test_not_picklable_raises_InvalidTask"] %}  # [py>=38]
-
-# hangs on osx CI
-{% set skips = skips + ["testLoop", "(TestCmdDumpDB and testDefault)", "test_run_wait"] %}  # [osx]
-{% set skips = skips + ["test_invalid_args"] %}  # [osx and py>=38]
-
-# fails on win CI with perms errors, etc.
-{% set skips = skips + ["test_dump", "test_remove_from_non_empty_file", "test_unicode_string"] %}  # [win]
-
 {% set cov_fail_under = 97 %}
-{% set cov_fail_under = 96 %}  # [osx]
-{% set cov_fail_under = 95 %}  # [win]
-
 
 package:
   name: doit-split
@@ -26,18 +13,18 @@ package:
 
 source:
   url: https://pypi.io/packages/source/d/doit/doit-{{ version }}.tar.gz
-  sha256: 715a322c874c4cb862394e3a0d69ff32572b5259f57036fbfdc1053c4c01d348
+  sha256: 71d07ccc9514cb22fe59d98999577665eaab57e16f644d04336ae0b4bae234bc
 
 build:
+  noarch: python
   number: {{ build_number }}
-  skip: true  # [py<38]
 
 requirements:
   host:
-    - python
+    - python {{ min_noarch_python }}
     - pip
   run:
-    - python
+    - python {{ min_noarch_python }}
 
 test:
   commands:
@@ -46,19 +33,19 @@ test:
 outputs:
   - name: doit
     build:
+      noarch: python
       number: {{ build_number }}
       entry_points:
         - doit = doit.__main__:main
-      script: '{{ PYTHON }} -m pip install . --no-deps -vv'
+      script: {{ PYTHON }} -m pip install . --no-deps -vv
     requirements:
       host:
         - pip
-        - python
+        - python {{ min_noarch_python }}
       run:
         - cloudpickle
-        - python
-        - macfsevents  # [osx]
-        - pyinotify  # [linux]
+        - importlib-metadata >=4.4
+        - python {{ min_noarch_python }}
     test:
       requires:
         - pip
@@ -75,9 +62,10 @@ outputs:
       host:
         - python {{ min_noarch_python }}
       run:
-        - {{ pin_subpackage("doit") }}
+        - {{ pin_subpackage("doit", max_pin="x.x.x") }}
         - python {{ min_noarch_python }}
-        - toml >=0.10.1
+        # technically python_version<"3.11"
+        - tomli
     test:
       requires:
         - pip
@@ -86,25 +74,6 @@ outputs:
 
     about:
       summary: doit - Automation Tool (with toml config)
-
-  - name: doit-with-plugins
-    build:
-      noarch: python
-    requirements:
-      host:
-        - python
-      run:
-        - {{ pin_subpackage("doit") }}
-        - python {{ min_noarch_python }}
-        - setuptools
-    test:
-      requires:
-        - pip
-      commands:
-        - pip check
-
-    about:
-      summary: doit - Automation Tool (with plugins)
 
   - name: doit-with-all
     build:
@@ -115,9 +84,7 @@ outputs:
         - python {{ min_noarch_python }}
       run:
         - python {{ min_noarch_python }}
-        - {{ pin_subpackage("doit-with-toml") }}
-        - {{ pin_subpackage("doit-with-plugins") }}
-
+        - {{ pin_subpackage("doit-with-toml", max_pin="x.x.x") }}
     test:
       source_files:
         - tests
