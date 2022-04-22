@@ -33,86 +33,11 @@ Current build status
 ====================
 
 
-<table>
-    
-  <tr>
-    <td>Azure</td>
+<table><tr><td>All platforms:</td>
     <td>
-      <details>
-        <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main">
-          </a>
-        </summary>
-        <table>
-          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
-          <tbody><tr>
-              <td>linux_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=linux&configuration=linux_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.8.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=linux&configuration=linux_64_python3.8.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=linux&configuration=linux_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=osx&configuration=osx_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.8.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=osx&configuration=osx_64_python3.8.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=osx&configuration=osx_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=win&configuration=win_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.8.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=win&configuration=win_64_python3.8.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main&jobName=win&configuration=win_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
+      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=244&branchName=main">
+        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/doit-feedstock?branchName=main">
+      </a>
     </td>
   </tr>
 </table>
@@ -124,7 +49,6 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit-green.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--all-green.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--plugins-green.svg)](https://anaconda.org/conda-forge/doit-with-plugins) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-plugins.svg)](https://anaconda.org/conda-forge/doit-with-plugins) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-plugins.svg)](https://anaconda.org/conda-forge/doit-with-plugins) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-plugins.svg)](https://anaconda.org/conda-forge/doit-with-plugins) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--toml-green.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) |
 
 Installing doit
@@ -137,16 +61,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `doit, doit-with-all, doit-with-plugins, doit-with-toml` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `doit, doit-with-all, doit-with-toml` can be installed with `conda`:
 
 ```
-conda install doit doit-with-all doit-with-plugins doit-with-toml
+conda install doit doit-with-all doit-with-toml
 ```
 
 or with `mamba`:
 
 ```
-mamba install doit doit-with-all doit-with-plugins doit-with-toml
+mamba install doit doit-with-all doit-with-toml
 ```
 
 It is possible to list all of the versions of `doit` available on your platform with `conda`:
