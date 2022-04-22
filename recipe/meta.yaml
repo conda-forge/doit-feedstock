@@ -17,7 +17,6 @@ source:
 
 build:
   number: {{ build_number }}
-  skip: true  # [py<38]
 
 requirements:
   host:
