@@ -1,5 +1,5 @@
 {% set version = "0.36.0" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 {% set min_noarch_python = ">=3.8" %}
 
 # we don't ship all of the fixtures
@@ -12,7 +12,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/d/doit/doit-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/d/doit/doit-{{ version }}.tar.gz
   sha256: 71d07ccc9514cb22fe59d98999577665eaab57e16f644d04336ae0b4bae234bc
 
 build:
@@ -21,12 +21,14 @@ build:
 
 requirements:
   host:
-    - python {{ min_noarch_python }}
+    - python {{ python_min }}
     - pip
   run:
-    - python {{ min_noarch_python }}
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   commands:
     - echo "TBD"
 
@@ -41,14 +43,15 @@ outputs:
     requirements:
       host:
         - pip
-        - python {{ min_noarch_python }}
+        - python {{ python_min }}
       run:
         - cloudpickle
         - importlib-metadata >=4.4
-        - python {{ min_noarch_python }}
+        - python >={{ python_min }}
     test:
       requires:
         - pip
+        - python {{ python_min }}
       commands:
         - pip check
         - doit --version
@@ -60,15 +63,16 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python {{ min_noarch_python }}
+        - python {{ python_min }}
       run:
         - {{ pin_subpackage("doit", max_pin="x.x.x") }}
-        - python {{ min_noarch_python }}
+        - python >={{ python_min }}
         # technically python_version<"3.11"
         - tomli
     test:
       requires:
         - pip
+        - python {{ python_min }}
       commands:
         - pip check
 
@@ -81,9 +85,9 @@ outputs:
       noarch: python
     requirements:
       host:
-        - python {{ min_noarch_python }}
+        - python {{ python_min }}
       run:
-        - python {{ min_noarch_python }}
+        - python >={{ python_min }}
         - {{ pin_subpackage("doit-with-toml", max_pin="x.x.x") }}
     test:
       source_files:
@@ -92,6 +96,7 @@ outputs:
         - pip
         - pytest >=4.0
         - pytest-cov
+        - python {{ python_min }}
       imports:
         - doit
       commands:
