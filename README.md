@@ -1,11 +1,15 @@
+About doit-feedstock
+====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/doit-feedstock/blob/main/LICENSE.txt)
+
+
 About doit
-==========
+----------
 
 Home: https://pydoit.org
 
 Package license: MIT
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/doit-feedstock/blob/main/LICENSE.txt)
 
 Summary: doit - Automation Tool
 
@@ -28,6 +32,24 @@ there is no out-of-the-box solution available.
 scientific computational pipelines, content generation, configuration
 management, etc."
 
+
+About doit-with-toml
+--------------------
+
+
+
+Package license: 
+
+Summary: doit - Automation Tool (with toml config)
+
+About doit-with-all
+-------------------
+
+
+
+Package license: 
+
+Summary: doit - Automation Tool (with all extras)
 
 Current build status
 ====================
@@ -117,7 +139,7 @@ available continuous integration services. Thanks to the awesome service provide
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
 [Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
 it is possible to build and upload installable packages to the
-[conda-forge](https://anaconda.org/conda-forge) [Anaconda-Cloud](https://anaconda.org/)
+[conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
 To manage the continuous integration and simplify feedstock maintenance

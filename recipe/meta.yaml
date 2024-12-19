@@ -1,74 +1,57 @@
 {% set version = "0.36.0" %}
-{% set build_number = 0 %}
-{% set min_noarch_python = ">=3.8" %}
 
-# we don't ship all of the fixtures
-{% set skips = ["test_execute", "test_sqlite_import"] %}
-
-{% set cov_fail_under = 97 %}
+{% set PYTHON = PYTHON | default("$PYTHON") %}
 
 package:
-  name: doit-split
+  name: doit
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/d/doit/doit-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/d/doit/doit-{{ version }}.tar.gz
   sha256: 71d07ccc9514cb22fe59d98999577665eaab57e16f644d04336ae0b4bae234bc
 
 build:
+  number: 1
   noarch: python
-  number: {{ build_number }}
+  script:
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+  entry_points:
+    - doit = doit.__main__:main
 
 requirements:
   host:
-    - python {{ min_noarch_python }}
     - pip
+    - python {{ python_min }}
+    - setuptools
   run:
-    - python {{ min_noarch_python }}
+    - cloudpickle
+    - importlib-metadata >=4.4
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - pip
+    - python {{ python_min }}
   commands:
-    - echo "TBD"
+    - pip check
+    - doit --version
+    - doit --help
 
 outputs:
   - name: doit
-    build:
-      noarch: python
-      number: {{ build_number }}
-      entry_points:
-        - doit = doit.__main__:main
-      script: {{ PYTHON }} -m pip install . --no-deps -vv
-    requirements:
-      host:
-        - pip
-        - python {{ min_noarch_python }}
-      run:
-        - cloudpickle
-        - importlib-metadata >=4.4
-        - python {{ min_noarch_python }}
-    test:
-      requires:
-        - pip
-      commands:
-        - pip check
-        - doit --version
-        - doit --help
 
   - name: doit-with-toml
     build:
-      number: {{ build_number }}
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - python {{ min_noarch_python }}
       run:
         - {{ pin_subpackage("doit", max_pin="x.x.x") }}
-        - python {{ min_noarch_python }}
         # technically python_version<"3.11"
         - tomli
     test:
       requires:
         - pip
+        - python {{ python_min }}
       commands:
         - pip check
 
@@ -77,26 +60,25 @@ outputs:
 
   - name: doit-with-all
     build:
-      number: {{ build_number }}
-      noarch: python
+      noarch: generic
     requirements:
-      host:
-        - python {{ min_noarch_python }}
       run:
-        - python {{ min_noarch_python }}
         - {{ pin_subpackage("doit-with-toml", max_pin="x.x.x") }}
     test:
+      files:
+        - run_doit_suite.py
       source_files:
         - tests
       requires:
+        - coverage
         - pip
         - pytest >=4.0
-        - pytest-cov
+        - python {{ python_min }}
       imports:
         - doit
       commands:
         - pip check
-        - pytest --cov doit -vv -k "not ({{ skips | join(' or ') }})" --no-cov-on-fail --cov-fail-under={{ cov_fail_under }} --cov-report term-missing:skip-covered
+        - python run_doit_suite.py
 
     about:
       summary: doit - Automation Tool (with all extras)
