@@ -7,7 +7,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/doit-feedstock/
 About doit
 ----------
 
-Home: https://pydoit.org
+Home: https://pypi.org/project/doit
 
 Package license: MIT
 
@@ -32,24 +32,89 @@ there is no out-of-the-box solution available.
 scientific computational pipelines, content generation, configuration
 management, etc."
 
-
 About doit-with-all
 -------------------
 
+Home: https://pypi.org/project/doit
 
-
-Package license: 
+Package license: MIT
 
 Summary: doit - Automation Tool (with all extras)
+
+Development: https://github.com/pydoit/doit
+
+Documentation: https://pydoit.org/contents.html
+
+`doit` is a task management & automation tool.
+
+`doit` comes from the idea of bringing the power of build-tools to execute
+any kind of **task**
+
+`doit` is a modern open-source build-tool written in python designed to be
+simple to use and flexible to deal with complex work-flows.
+
+It is specially suitable for building and managing custom work-flows where
+there is no out-of-the-box solution available.
+
+`doit` has been successfully used on: systems test/integration automation,
+scientific computational pipelines, content generation, configuration
+management, etc."
+
+About doit-with-cloudpickle
+---------------------------
+
+Home: https://pypi.org/project/doit
+
+Package license: MIT
+
+Summary: doit - Automation Tool (with cloudpickle)
+
+Development: https://github.com/pydoit/doit
+
+Documentation: https://pydoit.org/contents.html
+
+`doit` is a task management & automation tool.
+
+`doit` comes from the idea of bringing the power of build-tools to execute
+any kind of **task**
+
+`doit` is a modern open-source build-tool written in python designed to be
+simple to use and flexible to deal with complex work-flows.
+
+It is specially suitable for building and managing custom work-flows where
+there is no out-of-the-box solution available.
+
+`doit` has been successfully used on: systems test/integration automation,
+scientific computational pipelines, content generation, configuration
+management, etc."
 
 About doit-with-toml
 --------------------
 
+Home: https://pypi.org/project/doit
 
-
-Package license: 
+Package license: MIT
 
 Summary: doit - Automation Tool (with toml config)
+
+Development: https://github.com/pydoit/doit
+
+Documentation: https://pydoit.org/contents.html
+
+`doit` is a task management & automation tool.
+
+`doit` comes from the idea of bringing the power of build-tools to execute
+any kind of **task**
+
+`doit` is a modern open-source build-tool written in python designed to be
+simple to use and flexible to deal with complex work-flows.
+
+It is specially suitable for building and managing custom work-flows where
+there is no out-of-the-box solution available.
+
+`doit` has been successfully used on: systems test/integration automation,
+scientific computational pipelines, content generation, configuration
+management, etc."
 
 Current build status
 ====================
@@ -71,6 +136,7 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit-green.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit.svg)](https://anaconda.org/conda-forge/doit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--all-green.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-all.svg)](https://anaconda.org/conda-forge/doit-with-all) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--cloudpickle-green.svg)](https://anaconda.org/conda-forge/doit-with-cloudpickle) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-cloudpickle.svg)](https://anaconda.org/conda-forge/doit-with-cloudpickle) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-cloudpickle.svg)](https://anaconda.org/conda-forge/doit-with-cloudpickle) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-cloudpickle.svg)](https://anaconda.org/conda-forge/doit-with-cloudpickle) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-doit--with--toml-green.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/doit-with-toml.svg)](https://anaconda.org/conda-forge/doit-with-toml) |
 
 Installing doit
@@ -83,16 +149,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `doit, doit-with-all, doit-with-toml` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `doit, doit-with-all, doit-with-cloudpickle, doit-with-toml` can be installed with `conda`:
 
 ```
-conda install doit doit-with-all doit-with-toml
+conda install doit doit-with-all doit-with-cloudpickle doit-with-toml
 ```
 
 or with `mamba`:
 
 ```
-mamba install doit doit-with-all doit-with-toml
+mamba install doit doit-with-all doit-with-cloudpickle doit-with-toml
 ```
 
 It is possible to list all of the versions of `doit` available on your platform with `conda`:

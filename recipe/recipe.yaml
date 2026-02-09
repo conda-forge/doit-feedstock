@@ -30,7 +30,7 @@ outputs:
     requirements:
       host:
         - pip
-        - python ${{ python_min }}
+        - python ${{ python_min }}.*
         - setuptools >=68.0
       run:
         - python >=${{ python_min }}
@@ -43,10 +43,8 @@ outputs:
             - ${{ python_min }}.*
       - requirements:
           run:
-            - pip
-            - python ${{ python_min }}
+            - python ${{ python_min }}.*
         script:
-          - pip check
           - doit --version
           - doit --help
 
@@ -65,12 +63,6 @@ outputs:
           python_version:
             - ${{ python_check_max }}.*
             - ${{ python_min }}.*
-      - requirements:
-          run:
-            - python ${{ python_min }}.*
-        script:
-          - doit --help
-          - doit --version
     about:
       summary: doit - Automation Tool (with cloudpickle)
 
@@ -108,16 +100,14 @@ outputs:
             - ${{ python_check_max }}.*
             - ${{ python_min }}.*
       - files:
-          recipe:
-            - run_doit_suite.py
           source:
-            - tests
+            - tests/
         requirements:
           run:
             - pytest-cov
             - python ${{ python_min }}.*
         script:
-          - python run_doit_suite.py
+          file: run_doit_suite.py
     about:
       summary: doit - Automation Tool (with all extras)
 
