@@ -1,0 +1,141 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "0.37.0"
+  python_check_max: "3.14"
+
+recipe:
+  name: doit
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/d/doit/doit-${{ version }}.tar.gz
+  sha256: d3c72e0e46a8fa1ddabea8f830762402dee090caf33c30c2295ac7010db8f09c
+
+build:
+  number: 0
+  noarch: python
+
+outputs:
+  - package:
+      name: doit
+    build:
+      noarch: python
+      script:
+        - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+      python:
+        entry_points:
+          - doit = doit.__main__:main
+    requirements:
+      host:
+        - pip
+        - python ${{ python_min }}.*
+        - setuptools >=68.0
+      run:
+        - python >=${{ python_min }}
+    tests:
+      - python:
+          imports: doit
+          pip_check: true
+          python_version:
+            - ${{ python_check_max }}.*
+            - ${{ python_min }}.*
+      - requirements:
+          run:
+            - python ${{ python_min }}.*
+        script:
+          - doit --version
+          - doit --help
+
+  - package:
+      name: doit-with-cloudpickle
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("doit", exact=True) }}
+        - cloudpickle
+    tests:
+      - python:
+          imports: doit
+          pip_check: true
+          python_version:
+            - ${{ python_check_max }}.*
+            - ${{ python_min }}.*
+    about:
+      summary: doit - Automation Tool (with cloudpickle)
+
+  - package:
+      name: doit-with-toml
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("doit", exact=True) }}
+        - tomli
+    tests:
+      - python:
+          imports: doit
+          pip_check: true
+          python_version:
+            - ${{ python_check_max }}.*
+            - ${{ python_min }}.*
+    about:
+      summary: doit - Automation Tool (with toml config)
+
+  - package:
+      name: doit-with-all
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("doit-with-toml", exact=True) }}
+        - ${{ pin_subpackage("doit-with-cloudpickle", exact=True) }}
+    tests:
+      - python:
+          imports: doit
+          pip_check: true
+          python_version:
+            - ${{ python_check_max }}.*
+            - ${{ python_min }}.*
+      - files:
+          source:
+            - tests/
+        requirements:
+          run:
+            - pytest-cov
+            - python ${{ python_min }}.*
+        script:
+          file: run_doit_suite.py
+    about:
+      summary: doit - Automation Tool (with all extras)
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: doit - Automation Tool
+  description: |
+    `doit` is a task management & automation tool.
+
+    `doit` comes from the idea of bringing the power of build-tools to execute
+    any kind of **task**
+
+    `doit` is a modern open-source build-tool written in python designed to be
+    simple to use and flexible to deal with complex work-flows.
+
+    It is specially suitable for building and managing custom work-flows where
+    there is no out-of-the-box solution available.
+
+    `doit` has been successfully used on: systems test/integration automation,
+    scientific computational pipelines, content generation, configuration
+    management, etc."
+  homepage: https://pypi.org/project/doit
+  repository: https://github.com/pydoit/doit
+  documentation: https://pydoit.org/contents.html
+
+extra:
+  feedstock-name: doit
+  recipe-maintainers:
+    - pbronez
+    - bollwyvl

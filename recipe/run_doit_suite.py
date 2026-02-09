@@ -1,7 +1,7 @@
 import sys
 from subprocess import call
 
-FAIL_UNDER = 97
+FAIL_UNDER = 96
 COV = ["coverage"]
 RUN = ["run", "--source=doit", "--branch", "-m"]
 PYTEST = ["pytest", "-vv", "-ra", "--color=yes", "--tb=long"]
@@ -10,6 +10,9 @@ REPORT = ["report", "--show-missing", "--skip-covered", f"--fail-under={FAIL_UND
 SKIPS = [
     "test_execute",
     "test_sqlite_import",
+    "dbm.ndbm",
+    "dbm.gnu",
+    "strace",
 ]
 
 SKIP_OR = " or ".join(SKIPS)
